@@ -1,10 +1,9 @@
+#include "header.h"
 #include "evictor.h"
 using namespace std;
-Evictor::Evictor(EvictionPolicyStrategy* policy)
-{
-    this->policy = policy;
+Evictor::Evictor(EvictionStrategy* e) {
+    strategy = e;
 }
-string Evictor::evict()
-{
-    return this->policy->evictElement();
+void Evictor::evict(unordered_map<string, CacheElement*> *currCache){
+    strategy->evict(currCache);
 }

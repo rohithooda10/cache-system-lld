@@ -1,11 +1,9 @@
 #pragma once
 #include "header.h"
 #include "evictionStrategy.h"
-#include "cacheElement.h"
 
-class Evictor {
+using namespace std;
+class LRUStrategy: public EvictionStrategy {
 public:
-    EvictionStrategy* strategy;
-    Evictor(EvictionStrategy* s);
     void evict(unordered_map<string, CacheElement*> *currCache);
 };

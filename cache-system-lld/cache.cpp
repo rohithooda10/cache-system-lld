@@ -1,26 +1,25 @@
+#include "header.h"
 #include "cache.h"
-Cache::Cache(int cap, Evictor* evictor)
-{
-    this->capacity = cap;
-    this->evictor = evictor;
+
+using namespace std;
+
+Cache::Cache(int cap, Evictor* e){
+    capacity = cap;
+    evictor = e;
 }
-void Cache::put(string key, string value, string expiry)
-{
-    if(this->currentCache.size() == capacity)
-        this->eviction();
-    CacheElement* newCacheElement = new CacheElement(key, value, expiry);
-    this->currentCache[key] = newCacheElement;
+
+string Cache::get(string key) {
+    if(currCache.find(key) != currCache.end())
+        return currCache[key]->value;
+    return "NOT FOUND";
 }
-string Cache::get(string key)
+
+void Cache::put(CacheElement *ele)
 {
-    if(this->currentCache.find(key) == this->currentCache.end())
+    if(capacity == 0)
     {
-        return "Not in cache";
+        evictor->evict(&currCache);
     }
-    return this->currentCache[key]->value;
-}
-void Cache::eviction()
-{
-    string key = this->evictor->evict();
-    this->currentCache.erase(key);
+    capacity--;
+    currCache[ele->key] = ele;
 }

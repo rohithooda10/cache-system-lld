@@ -2,14 +2,13 @@
 #include "header.h"
 #include "cacheElement.h"
 #include "evictor.h"
-class Cache
-{
+
+class Cache {
 public:
-    Evictor* evictor;
+    Evictor *evictor;
     int capacity;
-    unordered_map<string, CacheElement*> currentCache;
-    Cache(int capacity, Evictor* evictor);
-    void put(string key, string val, string expiry);
+    Cache(int cap, Evictor* e);
+    unordered_map<string, CacheElement*> currCache;
     string get(string key);
-    void eviction();
+    void put(CacheElement* ele);
 };

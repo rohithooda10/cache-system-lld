@@ -1,7 +1,8 @@
 #include "cacheElement.h"
-CacheElement::CacheElement(string key, string val, string expiry)
+
+CacheElement::CacheElement(string k, string v, string exp)
 {
-    this->key = key;
-    this->value = val;
-    this->expiry = expiry;
+    key = k;
+    value = v;
+    expiry = exp;
 }

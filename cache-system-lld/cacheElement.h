@@ -1,9 +1,9 @@
 #pragma once
 #include "header.h"
 using namespace std;
-class CacheElement
-{
+
+class CacheElement {
 public:
     string key, value, expiry;
-    CacheElement(string key, string val, string expiry);
+    CacheElement(string k, string v, string exp);
 };
